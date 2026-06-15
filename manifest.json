@@ -1,0 +1,77 @@
+{
+  "name": "cortex-plugin-cicd-guardian",
+  "version": "1.0.0",
+  "description": "Monitor CI/CD pipelines, detect flaky tests, analyze failures",
+  "kind": "esm",
+  "entryPoint": "mod.ts",
+  "runtime": "deno",
+  "author": "CortexPrism",
+  "license": "MIT",
+  "repository": "https://github.com/CortexPrism/cortex-plugin-cicd-guardian",
+  "capabilities": [
+    "tools",
+    "network:fetch"
+  ],
+  "tools": [
+    {
+      "name": "cicd_monitor",
+      "description": "Monitor pipeline runs",
+      "params": [
+        { "name": "repo", "type": "string", "description": "Repository name (owner/repo)", "required": true },
+        { "name": "provider", "type": "string", "description": "CI provider", "required": false },
+        { "name": "branch", "type": "string", "description": "Branch name filter", "required": false }
+      ]
+    },
+    {
+      "name": "cicd_detect_flaky",
+      "description": "Detect flaky tests",
+      "params": [
+        { "name": "repo", "type": "string", "description": "Repository name (owner/repo)", "required": true },
+        { "name": "recent_runs", "type": "number", "description": "Number of recent runs to analyze", "required": false },
+        { "name": "threshold_percent", "type": "number", "description": "Flaky threshold percentage", "required": false }
+      ]
+    },
+    {
+      "name": "cicd_analyze_failure",
+      "description": "Analyze build failure",
+      "params": [
+        { "name": "repo", "type": "string", "description": "Repository name (owner/repo)", "required": true },
+        { "name": "run_id", "type": "number", "description": "Pipeline run ID", "required": true },
+        { "name": "provider", "type": "string", "description": "CI provider", "required": false }
+      ]
+    },
+    {
+      "name": "cicd_suggest_fix",
+      "description": "Suggest fix for failure",
+      "params": [
+        { "name": "repo", "type": "string", "description": "Repository name (owner/repo)", "required": true },
+        { "name": "run_id", "type": "number", "description": "Pipeline run ID", "required": true }
+      ]
+    },
+    {
+      "name": "cicd_auto_merge",
+      "description": "Auto-merge passing PRs",
+      "params": [
+        { "name": "repo", "type": "string", "description": "Repository name (owner/repo)", "required": true },
+        { "name": "pr_number", "type": "number", "description": "Pull request number", "required": true },
+        { "name": "checks", "type": "string", "description": "Required check names (comma-separated)", "required": false }
+      ]
+    }
+  ],
+  "ui": {
+    "section": "General",
+    "fields": [
+      { "key": "defaultProvider", "label": "Default Provider", "type": "select", "description": "Default CI/CD provider", "defaultValue": "github", "options": [{ "label": "GitHub", "value": "github" }, { "label": "GitLab", "value": "gitlab" }, { "label": "Jenkins", "value": "jenkins" }] },
+      { "key": "githubToken", "label": "GitHub Token", "type": "secret", "description": "GitHub personal access token" },
+      { "key": "gitlabToken", "label": "GitLab Token", "type": "secret", "description": "GitLab personal access token" }
+    ]
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "cortex": ">=1.0.0"
+  },
+  "aiDisclosure": {
+    "tools": ["Claude Code (Anthropic)"],
+    "humanReview": true
+  }
+}
