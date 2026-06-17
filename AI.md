@@ -8,7 +8,8 @@ This plugin was developed with AI assistance.
 
 ## Scope
 
-AI assistance was used to scaffold code, documentation, and test files. All generated code was manually reviewed for correctness and security.
+AI assistance was used to scaffold code, documentation, and test files. All generated code was
+manually reviewed for correctness and security.
 
 ## Review
 
