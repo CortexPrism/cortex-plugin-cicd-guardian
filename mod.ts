@@ -3,6 +3,7 @@ import type { PluginContext, Tool, ToolCallResult, ToolContext } from './types.t
 let config: Record<string, string> = {};
 
 export async function onLoad(ctx: PluginContext): Promise<void> {
+  ctx.logger.info(`[cortex-plugin-cicd-guardian] Loaded`);
   config = {
     defaultProvider: (await ctx.config.get('defaultProvider')) ?? 'github',
     githubToken: (await ctx.config.get('githubToken')) ?? '',

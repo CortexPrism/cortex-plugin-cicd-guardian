@@ -1,6 +1,6 @@
 {
   "name": "cortex-plugin-cicd-guardian",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Monitor CI/CD pipelines, detect flaky tests, analyze failures",
   "kind": "esm",
   "entryPoint": "mod.ts",
@@ -23,7 +23,12 @@
           "description": "Repository name (owner/repo)",
           "required": true
         },
-        { "name": "provider", "type": "string", "description": "CI provider", "required": false },
+        {
+          "name": "provider",
+          "type": "string",
+          "description": "CI provider",
+          "required": false
+        },
         {
           "name": "branch",
           "type": "string",
@@ -66,8 +71,18 @@
           "description": "Repository name (owner/repo)",
           "required": true
         },
-        { "name": "run_id", "type": "number", "description": "Pipeline run ID", "required": true },
-        { "name": "provider", "type": "string", "description": "CI provider", "required": false }
+        {
+          "name": "run_id",
+          "type": "number",
+          "description": "Pipeline run ID",
+          "required": true
+        },
+        {
+          "name": "provider",
+          "type": "string",
+          "description": "CI provider",
+          "required": false
+        }
       ]
     },
     {
@@ -80,7 +95,12 @@
           "description": "Repository name (owner/repo)",
           "required": true
         },
-        { "name": "run_id", "type": "number", "description": "Pipeline run ID", "required": true }
+        {
+          "name": "run_id",
+          "type": "number",
+          "description": "Pipeline run ID",
+          "required": true
+        }
       ]
     },
     {
@@ -109,31 +129,44 @@
     }
   ],
   "ui": {
-    "section": "General",
-    "fields": [
+    "settings": [
       {
-        "key": "defaultProvider",
-        "label": "Default Provider",
-        "type": "select",
-        "description": "Default CI/CD provider",
-        "defaultValue": "github",
-        "options": [
-          { "label": "GitHub", "value": "github" },
-          { "label": "GitLab", "value": "gitlab" },
-          { "label": "Jenkins", "value": "jenkins" }
+        "section": "General",
+        "fields": [
+          {
+            "key": "defaultProvider",
+            "label": "Default Provider",
+            "type": "select",
+            "description": "Default CI/CD provider",
+            "default": "github",
+            "enum": [
+              {
+                "label": "GitHub",
+                "value": "github"
+              },
+              {
+                "label": "GitLab",
+                "value": "gitlab"
+              },
+              {
+                "label": "Jenkins",
+                "value": "jenkins"
+              }
+            ]
+          },
+          {
+            "key": "githubToken",
+            "label": "GitHub Token",
+            "type": "secret",
+            "description": "GitHub personal access token"
+          },
+          {
+            "key": "gitlabToken",
+            "label": "GitLab Token",
+            "type": "secret",
+            "description": "GitLab personal access token"
+          }
         ]
-      },
-      {
-        "key": "githubToken",
-        "label": "GitHub Token",
-        "type": "secret",
-        "description": "GitHub personal access token"
-      },
-      {
-        "key": "gitlabToken",
-        "label": "GitLab Token",
-        "type": "secret",
-        "description": "GitLab personal access token"
       }
     ]
   },
@@ -142,7 +175,10 @@
     "cortex": ">=1.0.0"
   },
   "aiDisclosure": {
-    "tools": ["Claude Code (Anthropic)"],
+    "tools": [
+      "Claude Code (Anthropic)"
+    ],
     "humanReview": true
-  }
+  },
+  "homepage": "https://github.com/CortexPrism/cortex-plugin-cicd-guardian"
 }
