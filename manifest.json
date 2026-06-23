@@ -1,6 +1,6 @@
 {
   "name": "cortex-plugin-cicd-guardian",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Monitor CI/CD pipelines, detect flaky tests, analyze failures",
   "kind": "esm",
   "entryPoint": "mod.ts",
@@ -138,8 +138,8 @@
             "label": "Default Provider",
             "type": "select",
             "description": "Default CI/CD provider",
-            "default": "github",
-            "enum": [
+            "defaultValue": "github",
+            "options": [
               {
                 "label": "GitHub",
                 "value": "github"
@@ -172,7 +172,7 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "cortex": ">=1.0.0"
+    "cortex": ">=0.51.0"
   },
   "aiDisclosure": {
     "tools": [
